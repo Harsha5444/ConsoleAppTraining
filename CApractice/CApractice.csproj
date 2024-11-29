@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>ArithmeticOperations</StartupObject>
+    <StartupObject>CApractice.ControlFlowStatements</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

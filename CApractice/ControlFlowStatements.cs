@@ -115,6 +115,56 @@
 
 
 
+//using System;
+
+//namespace CApractice
+//{
+//    class ControlFlowStatements
+//    {
+//        static void Main(string[] args)
+//        {
+//            // For Loop
+//            for (int i = 0; i < 5; i++)
+//            {
+//                Console.WriteLine($"Iteration {i}");
+//            }
+
+//            // While Loop
+//            int counter = 0;
+//            while (counter < 5)
+//            {
+//                Console.WriteLine($"Count: {counter}");
+//                counter++;
+//            }
+
+//            // Do-While Loop (executes at least once)
+//            int number = 0;
+//            do
+//            {
+//                Console.WriteLine($"Number is {number}");
+//                number++;
+//            } while (number < 3);
+
+//            // Foreach Loop (for collections)
+//            string[] fruits = { "apple", "banana", "orange" };
+//            foreach (string fruit in fruits)
+//            {
+//                Console.WriteLine(fruit);
+//            }
+
+//            // Nested Loops
+//            for (int i = 0; i < 3; i++)
+//            {
+//                for (int j = 0; j < 3; j++)
+//                {
+//                    Console.WriteLine($"i: {i}, j: {j}");
+//                }
+//            }
+//        }
+//    }
+//}
+
+
 using System;
 
 namespace CApractice
@@ -123,43 +173,47 @@ namespace CApractice
     {
         static void Main(string[] args)
         {
-            // For Loop
+            // Break statement (exits the loop)
+            for (int i = 0; i < 10; i++)
+            {
+                if (i == 5)
+                {
+                    break;
+                }
+                Console.WriteLine(i);
+            }
+
+            // Continue statement (skips current iteration)
             for (int i = 0; i < 5; i++)
             {
-                Console.WriteLine($"Iteration {i}");
-            }
-
-            // While Loop
-            int counter = 0;
-            while (counter < 5)
-            {
-                Console.WriteLine($"Count: {counter}");
-                counter++;
-            }
-
-            // Do-While Loop (executes at least once)
-            int number = 0;
-            do
-            {
-                Console.WriteLine($"Number is {number}");
-                number++;
-            } while (number < 3);
-
-            // Foreach Loop (for collections)
-            string[] fruits = { "apple", "banana", "orange" };
-            foreach (string fruit in fruits)
-            {
-                Console.WriteLine(fruit);
-            }
-
-            // Nested Loops
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 3; j++)
+                if (i == 2)
                 {
-                    Console.WriteLine($"i: {i}, j: {j}");
+                    continue;
+                }
+                Console.WriteLine(i);
+            }
+
+            // Goto statement (rarely used but good to know)
+            int index = 0;
+        startLabel:
+            if (index < 5)
+            {
+                Console.WriteLine(index);
+                index++;
+                goto startLabel;
+            }
+        }
+
+        private static int FindNumber(int[] numbers, int target)
+        {
+            foreach (int num in numbers)
+            {
+                if (num == target)
+                {
+                    return num;
                 }
             }
+            return -1;
         }
     }
 }
