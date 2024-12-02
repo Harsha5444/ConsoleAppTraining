@@ -34,32 +34,57 @@ Format your output clearly
 */
 
 using System;
-
-class NumberAnalysis
+namespace CApractice
 {
-    static void Main()
+    class NumberAnalysis
     {
-        int count = 0;
-        int sum = 0;
-        int largest = int.MinValue;
-        int smallest = int.MaxValue;
-        int evenCount = 0;
-        int oddCount = 0;
-
-        for (int i = 1;i>count;i++)
+        static void Main()
         {
-            int num = int.Parse(Console.ReadLine());
-            sum = sum + num;
-            count++;
-            if(num == -1)
+            int count = 0;
+            int sum = 0;
+            int largest = int.MinValue;
+            int smallest = int.MaxValue;
+            int evenCount = 0;
+            int oddCount = 0;
+            int avg = 0;
+            Console.WriteLine($"Enter Numbers: ");
+            while (true)
             {
-                break;
+                int num = int.Parse(Console.ReadLine());
+                if (num == -1)
+                {
+                    break;
+                }
+                if (num < smallest)
+                {
+                    smallest = num;
+                }
+                if (num > largest)
+                {
+                    largest = num;
+                }
+                if (num % 2 == 0)
+                {
+                    evenCount++;
+                }
+                else
+                {
+                    oddCount++;
+                }
+                sum = sum + num;
+                count++;
             }
-            
+            avg += sum / count;
+
+            Console.WriteLine($"The count of numbers entered: {count}");
+            Console.WriteLine($"The Largest Number: {largest}");
+            Console.WriteLine($"The Smallest Number: {smallest}");
+            Console.WriteLine($"sum: {sum}");
+            Console.WriteLine($"The average of the numbers you entered is: {avg}");
+            Console.WriteLine($"Count Of Odd Numbers Entered: {oddCount}");
+            Console.WriteLine($"Count Of Even Numbers Entered: {evenCount}");
+            Console.ReadLine();
         }
 
-        Console.WriteLine($"sum: {sum}");
-        Console.ReadLine();
     }
-
 }

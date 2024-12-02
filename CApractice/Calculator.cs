@@ -1,42 +1,44 @@
 ﻿using System;
-
-class Calculator
+namespace CApractice
 {
-    static void Main()
+    class Calculator
     {
-        Console.WriteLine("Enter first number:");
-        int firstNum = int.Parse(Console.ReadLine());
+        static void Main()
+        {
+            Console.WriteLine("Enter first number:");
+            int firstNum = int.Parse(Console.ReadLine());
 
 
-        Console.WriteLine("Enter second number:");
-        int secondNum = int.Parse(Console.ReadLine());
+            Console.WriteLine("Enter second number:");
+            int secondNum = int.Parse(Console.ReadLine());
 
-        // Using string interpolation
-        Console.WriteLine($"Addition Of Numbers: {firstNum + secondNum}");
-        Console.WriteLine($"Subtraction Of Numbers: {firstNum - secondNum}");
-        Console.WriteLine($"Multiplication Of Numbers: {firstNum * secondNum}");
-        Console.WriteLine($"Division Of Numbers: {firstNum / secondNum}");
-        Console.WriteLine($"Remainder : {firstNum % secondNum}");
-        // Remember to handle potential errors!
+            // Using string interpolation
+            Console.WriteLine($"Addition Of Numbers: {firstNum + secondNum}");
+            Console.WriteLine($"Subtraction Of Numbers: {firstNum - secondNum}");
+            Console.WriteLine($"Multiplication Of Numbers: {firstNum * secondNum}");
+            Console.WriteLine($"Division Of Numbers: {firstNum / secondNum}");
+            Console.WriteLine($"Remainder : {firstNum % secondNum}");
+            // Remember to handle potential errors!
 
-        bool isEqual = firstNum == secondNum;          // Equal to (false)
-        bool isNotEqual = firstNum != secondNum;       // Not equal to (true)
-        bool isGreater = firstNum > secondNum;         // Greater than (false)
-        bool isLess = firstNum < secondNum;            // Less than (true)
-        bool isGreaterOrEqual = firstNum >= secondNum; // Greater than or equal to (false)
-        bool isLessOrEqual = firstNum <= secondNum;    // Less than or equal to (true)
+            bool isEqual = firstNum == secondNum;          // Equal to (false)
+            bool isNotEqual = firstNum != secondNum;       // Not equal to (true)
+            bool isGreater = firstNum > secondNum;         // Greater than (false)
+            bool isLess = firstNum < secondNum;            // Less than (true)
+            bool isGreaterOrEqual = firstNum >= secondNum; // Greater than or equal to (false)
+            bool isLessOrEqual = firstNum <= secondNum;    // Less than or equal to (true)
 
-        Console.WriteLine($"firstNum == secondNum {isEqual}");
-        Console.WriteLine($"firstNum != secondNum {isNotEqual}");
-        Console.WriteLine($"firstNum > secondNum  {isGreater}");
-        Console.WriteLine($"firstNum < secondNum  {isLess}");
-        Console.WriteLine($"firstNum >= secondNum {isGreaterOrEqual}");
-        Console.WriteLine($"firstNum <= secondNum {isLessOrEqual}");
-
-
+            Console.WriteLine($"firstNum == secondNum {isEqual}");
+            Console.WriteLine($"firstNum != secondNum {isNotEqual}");
+            Console.WriteLine($"firstNum > secondNum  {isGreater}");
+            Console.WriteLine($"firstNum < secondNum  {isLess}");
+            Console.WriteLine($"firstNum >= secondNum {isGreaterOrEqual}");
+            Console.WriteLine($"firstNum <= secondNum {isLessOrEqual}");
 
 
-        Console.ReadLine();
+
+
+            Console.ReadLine();
+        }
     }
 }
 
