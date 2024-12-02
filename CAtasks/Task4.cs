@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.Design;
 
 namespace CAtasks
 {
@@ -14,7 +15,7 @@ namespace CAtasks
             Console.WriteLine($"3. Redmi 14 - 30,000");
             Console.WriteLine($"4. Vivo - 23,000");
             Console.WriteLine($"5. Oppo - 20,000");
-
+            Selection:
             Console.WriteLine($"Select any product (1, 2, 3, 4, 5): ");
             int product = Convert.ToInt32(Console.ReadLine());
             switch (product)
@@ -36,7 +37,7 @@ namespace CAtasks
                     break;
                 default:
                     Console.WriteLine($"Please Enter correct Product ID..!");
-                    break;
+                    goto Selection;
             }
             Console.WriteLine($"Do you want to add more items to cart (Yes/no): ");
             string answer = Console.ReadLine();

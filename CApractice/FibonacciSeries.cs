@@ -28,7 +28,7 @@ namespace CApractice
                     second = next;
                 }
             }
+            Console.Read();
         }
     }
 }
-
