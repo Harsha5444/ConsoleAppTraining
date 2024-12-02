@@ -2,7 +2,7 @@
 
 namespace CAtasks
 {
-    class Task3
+    class Task3_calculator
     {
         static void Main(string[] args)
         {

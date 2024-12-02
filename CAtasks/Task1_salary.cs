@@ -2,7 +2,7 @@
 
 namespace CAtasks
 {
-    class Task1
+    class Task1_salary
     {
         static void Main(string[] args)
         {
