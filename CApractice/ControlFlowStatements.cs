@@ -202,6 +202,8 @@ namespace CApractice
                 index++;
                 goto startLabel;
             }
+
+            Console.ReadLine();
         }
 
         private static int FindNumber(int[] numbers, int target)
