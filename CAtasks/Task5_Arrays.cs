@@ -3,7 +3,7 @@ using System.ComponentModel.Design;
 
 namespace CAtasks
 {
-    class Task5_Arrays_1
+    class Task5_Arrays
     {
         static void Main(string[] args)
         {

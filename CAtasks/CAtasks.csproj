@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>CAtasks.Task5_Arrays_1</StartupObject>
+    <StartupObject>CAtasks.Task5_Arrays</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -51,8 +51,7 @@
     <Compile Include="Task2_numbers.cs" />
     <Compile Include="Task3_calculator.cs" />
     <Compile Include="Task4_shopping.cs" />
-    <Compile Include="Task5_Arrays_1.cs" />
-    <Compile Include="Task6_Arrays_2.cs" />
+    <Compile Include="Task5_Arrays.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
