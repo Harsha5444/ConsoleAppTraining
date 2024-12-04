@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>CAtasks.Task6_JaggedArray</StartupObject>
+    <StartupObject>CAtasks.Task5_Arrays</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -52,7 +52,9 @@
     <Compile Include="Task3_calculator.cs" />
     <Compile Include="Task4_shopping.cs" />
     <Compile Include="Task5_Arrays.cs" />
-    <Compile Include="Task6_JaggedArray.cs" />
+    <Compile Include="Task6_DynamicArrays.cs" />
+    <Compile Include="Task7_JaggedArray.cs" />
+    <Compile Include="Task8_DynamicJaggedArray.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
