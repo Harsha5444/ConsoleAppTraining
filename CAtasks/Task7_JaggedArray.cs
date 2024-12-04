@@ -8,16 +8,17 @@ namespace CAtasks
         {
             /*---------Single dimension jagged array---------*/
 
-            //int[][] array = new int[2][];
+            //int[][] array = new int[3][];
             //array[0] = new int[] { 23, 44, 56 };
             //array[1] = new int[] { 22, 44 };
-
+            //array[2] = new int[] { 22, 44,55,66,77 };
             //foreach (var item in array)
             //{
             //    foreach (var value in item)
             //    {
-            //        Console.Write($"{value}, ");
+            //        Console.Write($"{value} ");
             //    }
+            //    Console.WriteLine();
             //}
             //Console.Read();
 

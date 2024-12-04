@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.35431.46
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAtasks", "CAtasks\CAtasks.csproj", "{CD18CEF0-836F-4341-8B29-14D4899DF407}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CApractice", "CApractice\CApractice.csproj", "{2888AE72-B6CE-4043-BA51-2B76BEB5D88A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAMethods&Functions", "CAMethods&Functions\CAMethods&Functions.csproj", "{34B7BECE-88EB-4CAC-9851-9222F5C37997}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{2888AE72-B6CE-4043-BA51-2B76BEB5D88A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2888AE72-B6CE-4043-BA51-2B76BEB5D88A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2888AE72-B6CE-4043-BA51-2B76BEB5D88A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34B7BECE-88EB-4CAC-9851-9222F5C37997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34B7BECE-88EB-4CAC-9851-9222F5C37997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34B7BECE-88EB-4CAC-9851-9222F5C37997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34B7BECE-88EB-4CAC-9851-9222F5C37997}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

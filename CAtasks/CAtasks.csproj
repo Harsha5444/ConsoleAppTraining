@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>CAtasks.Task5_Arrays</StartupObject>
+    <StartupObject>CAtasks.Task7_JaggedArray</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

@@ -6,18 +6,27 @@ namespace CApractice
     {
         static void Main(string[] args)
         {
+            start:
             Console.WriteLine("Enter a Number: ");
             int num = Convert.ToInt32(Console.ReadLine());
-            
-            for (int i = 2; i < num; i++)
+            if (num < 2) Console.WriteLine($"{num} is not a prime number.");
+            else if (num == 2) Console.WriteLine($"{num} is a prime number.");
+            else
             {
-                if (num % i == 0)
+                bool set = true;
+                for (int i = 2; i <= Math.Sqrt(num); i++)
                 {
-                    Console.WriteLine("is not a prime number");
+                    if (num % i == 0)
+                    {
+                        set = false;
+                        break;
+                    }
                 }
-                else Console.WriteLine("is a prime number");
+                if (set) Console.WriteLine($"{num} is a prime number.");
+                else Console.WriteLine($"{num} is not a prime number.");
             }
-            Console.Read();
+            Console.WriteLine();
+            goto start;
         }
     }
 }
