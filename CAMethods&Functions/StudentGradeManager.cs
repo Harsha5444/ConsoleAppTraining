@@ -19,7 +19,7 @@ class GradeManager
 
 // Add extension methods here
 
-class Program
+class StudentGradeManager
 {
     static void Main()
     {
