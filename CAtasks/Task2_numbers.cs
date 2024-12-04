@@ -2,7 +2,7 @@
 
 namespace CAtasks
 {
-    class Task2
+    class Task2_numbers
     {
         static void Main(string[] args)
         {

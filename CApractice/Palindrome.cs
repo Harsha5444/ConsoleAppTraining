@@ -26,6 +26,7 @@
 
 
 using System;
+using System.Linq;
 
 namespace CAPractice
 {
@@ -35,11 +36,20 @@ namespace CAPractice
         {
             Console.WriteLine($"Enter a Word: ");
             string word = Console.ReadLine();
-            string input = word;
-            string revString = "";
-            Console.WriteLine(revString);
-            Console.Read();
+            //string revString = "";
+            //for (int i = word.Length - 1; i >= 0; i--)
+            //{
+            //    Console.Write($"{word[i]}");
+            //    revString += word[i];
+            //}
+            //if (revString == word)
+            //{
+            //    Console.WriteLine("\npalindrome");
+            //}
+            //else Console.WriteLine("not a ");
+            //Console.Read();
 
+            
         }
     }
 }
