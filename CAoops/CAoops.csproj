@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2888AE72-B6CE-4043-BA51-2B76BEB5D88A}</ProjectGuid>
+    <ProjectGuid>{EBA9CCAE-137D-48F2-AB3D-5485E0448D9F}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>CApractice</RootNamespace>
-    <AssemblyName>CApractice</AssemblyName>
+    <RootNamespace>CAoops</RootNamespace>
+    <AssemblyName>CAoops</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>CApractice.ReverseString</StartupObject>
+    <StartupObject>CAoops.Encapsulation</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -46,20 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArithmeticOperations.cs" />
-    <Compile Include="ArrayOperations.cs" />
-    <Compile Include="ArraysandSearching.cs" />
-    <Compile Include="Calculator.cs" />
-    <Compile Include="ControlFlowStatements.cs" />
-    <Compile Include="FibonacciSeries.cs" />
-    <Compile Include="NumberAnalysis.cs" />
-    <Compile Include="Palindrome.cs" />
-    <Compile Include="Pattern.cs" />
-    <Compile Include="PrimeNumber.cs" />
+    <Compile Include="abstraction .cs" />
+    <Compile Include="Encapsulation .cs" />
+    <Compile Include="Inheritance .cs" />
+    <Compile Include="polymorphism .cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReverseNumber.cs" />
-    <Compile Include="ReverseString.cs" />
-    <Compile Include="StudentInformation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

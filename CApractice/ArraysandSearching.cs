@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CApractice
 {
@@ -23,7 +19,7 @@ namespace CApractice
             // Sort the array before binary search
             Array.Sort(array);
 
-            begin:
+        begin:
             Console.WriteLine($"Enter a number to search (-1 to exit): ");
             int number = Convert.ToInt32(Console.ReadLine());
 
