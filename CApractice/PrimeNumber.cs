@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace CApractice
 {
@@ -6,27 +7,37 @@ namespace CApractice
     {
         static void Main(string[] args)
         {
-            start:
-            Console.WriteLine("Enter a Number: ");
-            int num = Convert.ToInt32(Console.ReadLine());
-            if (num < 2) Console.WriteLine($"{num} is not a prime number.");
-            else if (num == 2) Console.WriteLine($"{num} is a prime number.");
-            else
+            while (true)
             {
-                bool set = true;
-                for (int i = 2; i <= Math.Sqrt(num); i++)
+                Console.Write("Enter a number (-1 to exit): ");
+                int num = Convert.ToInt32(Console.ReadLine());
+                if (num == -1)
                 {
-                    if (num % i == 0)
-                    {
-                        set = false;
-                        break;
-                    }
+                    Console.WriteLine($"Goodbye!");
+                    break;
                 }
-                if (set) Console.WriteLine($"{num} is a prime number.");
-                else Console.WriteLine($"{num} is not a prime number.");
+                else if (num > 0)
+                {
+                    if (num < 2) Console.WriteLine($"{num} is not a prime number.");
+                    else if (num == 2) Console.WriteLine($"{num} is a prime number.");
+                    else
+                    {
+                        bool set = true;
+                        for (int i = 2; i <= Math.Sqrt(num); i++)
+                        {
+                            if (num % i == 0)
+                            {
+                                set = false;
+                                break;
+                            }
+                        }
+                        if (set) Console.WriteLine($"{num} is a prime number.");
+                        else Console.WriteLine($"{num} is not a prime number.");
+                    }
+                    Console.WriteLine();
+                }
             }
-            Console.WriteLine();
-            goto start;
+            Console.Read();
         }
     }
 }
