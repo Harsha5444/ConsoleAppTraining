@@ -55,6 +55,7 @@
     <Compile Include="NumberAnalysis.cs" />
     <Compile Include="Palindrome.cs" />
     <Compile Include="Pattern.cs" />
+    <Compile Include="Practice_Dummy.cs" />
     <Compile Include="PrimeNumber.cs" />
     <Compile Include="PrintRange.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
