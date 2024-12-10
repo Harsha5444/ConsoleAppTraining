@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>CApractice.ReverseArray</StartupObject>
+    <StartupObject>CApractice.execute</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -50,6 +50,7 @@
     <Compile Include="ArrayOperations.cs" />
     <Compile Include="ArraysandSearching.cs" />
     <Compile Include="Calculator.cs" />
+    <Compile Include="CalculatorMethods.cs" />
     <Compile Include="ControlFlowStatements.cs" />
     <Compile Include="FibonacciSeries.cs" />
     <Compile Include="NumberAnalysis.cs" />
