@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2888AE72-B6CE-4043-BA51-2B76BEB5D88A}</ProjectGuid>
+    <ProjectGuid>{CC3E22D9-A976-45C1-811F-39CBFB00E395}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>CApractice</RootNamespace>
-    <AssemblyName>CApractice</AssemblyName>
+    <RootNamespace>CACode</RootNamespace>
+    <AssemblyName>CACode</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -32,9 +32,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject>CApractice.arrayhelper</StartupObject>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,25 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArithmeticOperations.cs" />
-    <Compile Include="ArrayHelper.cs" />
-    <Compile Include="ArrayOperations.cs" />
-    <Compile Include="ArraysandSearching.cs" />
-    <Compile Include="Calculator.cs" />
-    <Compile Include="CalculatorMethods.cs" />
-    <Compile Include="ControlFlowStatements.cs" />
-    <Compile Include="FibonacciSeries.cs" />
-    <Compile Include="NumberAnalysis.cs" />
-    <Compile Include="Palindrome.cs" />
-    <Compile Include="Pattern.cs" />
-    <Compile Include="Practice_Dummy.cs" />
-    <Compile Include="PrimeNumber.cs" />
-    <Compile Include="PrintRange.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReverseArray.cs" />
-    <Compile Include="ReverseNumber.cs" />
-    <Compile Include="ReverseString.cs" />
-    <Compile Include="StudentInformation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

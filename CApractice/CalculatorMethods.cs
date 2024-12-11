@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CApractice
 {
@@ -18,34 +14,42 @@ namespace CApractice
         {
             return a + b;
         }
-        public int Sub(int a , int b)
+        public int Sub(int a, int b)
         {
-            return (a - b);
+            return a - b;
         }
-        public int Mutiply(int a , int b)
+        public int Multiply(int a, int b)
         {
-            return (a * b);
+            return a * b;
         }
-        public int div(int a , int b)
+        public int Div(int a, int b)
         {
-            return (a / b);
+            if (b == 0)
+            {
+                Console.WriteLine("Error: Division by zero is not allowed.");
+                return 0; // Return a default value
+            }
+            return a / b;
         }
     }
 
-    class execute
+    class Execute
     {
         static void Main(string[] args)
         {
-            CalculatorMethods addition = new CalculatorMethods();
-            CalculatorMethods subtraction = new CalculatorMethods();
-            CalculatorMethods multiplication = new CalculatorMethods();
-            CalculatorMethods division = new CalculatorMethods();
-            int ans1 = addition.Add(10, 30);
-            subtraction.Sub(10, 30);
-            multiplication.Mutiply(10, 30); 
-            division.div(10, 30);
-            Console.WriteLine(ans1);
-            Console.Read();
+            CalculatorMethods calculator = new CalculatorMethods();
+
+            int ans1 = calculator.Add(10, 30);
+            int ans2 = calculator.Sub(10, 30);
+            int ans3 = calculator.Multiply(10, 30);
+            int ans4 = calculator.Div(10, 30);
+
+            Console.WriteLine($"Addition: {ans1}");
+            Console.WriteLine($"Subtraction: {ans2}");
+            Console.WriteLine($"Multiplication: {ans3}");
+            Console.WriteLine($"Division: {ans4}");
+
+            Console.ReadLine();
         }
     }
 }

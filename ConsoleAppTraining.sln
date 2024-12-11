@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAMethods&Functions", "CAMe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAoops", "CAoops\CAoops.csproj", "{EBA9CCAE-137D-48F2-AB3D-5485E0448D9F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CACode", "CACode\CACode.csproj", "{CC3E22D9-A976-45C1-811F-39CBFB00E395}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{EBA9CCAE-137D-48F2-AB3D-5485E0448D9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBA9CCAE-137D-48F2-AB3D-5485E0448D9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBA9CCAE-137D-48F2-AB3D-5485E0448D9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC3E22D9-A976-45C1-811F-39CBFB00E395}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC3E22D9-A976-45C1-811F-39CBFB00E395}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC3E22D9-A976-45C1-811F-39CBFB00E395}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC3E22D9-A976-45C1-811F-39CBFB00E395}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
