@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CC3E22D9-A976-45C1-811F-39CBFB00E395}</ProjectGuid>
+    <ProjectGuid>{EA23B40A-94D5-4376-B57D-4AF3D49ABE51}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>CACode</RootNamespace>
-    <AssemblyName>CACode</AssemblyName>
+    <RootNamespace>Git_test</RootNamespace>
+    <AssemblyName>Git test</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -32,9 +32,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject>CACode.recursion</StartupObject>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,10 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="overloading.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="recursion.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

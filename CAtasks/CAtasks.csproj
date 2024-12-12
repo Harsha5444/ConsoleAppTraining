@@ -55,6 +55,7 @@
     <Compile Include="Task6_DynamicArrays.cs" />
     <Compile Include="Task7_JaggedArray.cs" />
     <Compile Include="Task8_DynamicJaggedArray.cs" />
+    <Compile Include="Task9_OperatorOverloading.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

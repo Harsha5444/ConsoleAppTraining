@@ -7,14 +7,15 @@ namespace CAMethods_Functions
         static void Main(string[] args)
         {
             /*----------------------Methods from Method_Basics----------------------*/
+            Method_Basics obj = new Method_Basics();
 
-            //Method_Basics.SayHello();
+            obj.SayHello();
 
-            //int sum = Method_Basics.Add(4,5);
-            //Console.WriteLine($"\n{sum}");
+            int sum = obj.Add(4, 5);
+            Console.WriteLine($"\n{sum}");
 
-            //string name = Method_Basics.FormatName("harsha", "vardhan", 23);
-            //Console.WriteLine(name);
+            string name = obj.FormatName("harsha", "vardhan", 23);
+            Console.WriteLine(name);
 
 
             /*-----------Methods from ParameterTypes-----------*/
