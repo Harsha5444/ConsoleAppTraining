@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>CAtasks.Task7_JaggedArray</StartupObject>
+    <StartupObject>CAtasks.Task10_ConstructorChaining</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Task10_ConstructorChaining.cs" />
     <Compile Include="Task1_salary.cs" />
     <Compile Include="Task2_numbers.cs" />
     <Compile Include="Task3_calculator.cs" />
