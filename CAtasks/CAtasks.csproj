@@ -50,15 +50,15 @@
     <Compile Include="Task10_ConstructorChaining.cs" />
     <Compile Include="Task11_Method%28Over,Hinding%29.cs" />
     <Compile Include="Task12_HybridInheritance.cs" />
-    <Compile Include="Task1_salary.cs" />
-    <Compile Include="Task2_numbers.cs" />
-    <Compile Include="Task3_calculator.cs" />
-    <Compile Include="Task4_shopping.cs" />
-    <Compile Include="Task5_Arrays.cs" />
-    <Compile Include="Task6_DynamicArrays.cs" />
-    <Compile Include="Task7_JaggedArray.cs" />
-    <Compile Include="Task8_DynamicJaggedArray.cs" />
-    <Compile Include="Task9_OperatorOverloading.cs" />
+    <Compile Include="1. Task1_salary.cs" />
+    <Compile Include="2. Task2_numbers.cs" />
+    <Compile Include="3. Task3_calculator.cs" />
+    <Compile Include="4. Task4_shopping.cs" />
+    <Compile Include="5. Task5_Arrays.cs" />
+    <Compile Include="6. Task6_DynamicArrays.cs" />
+    <Compile Include="7. Task7_JaggedArray.cs" />
+    <Compile Include="8. Task8_DynamicJaggedArray.cs" />
+    <Compile Include="9. Task9_OperatorOverloading.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
