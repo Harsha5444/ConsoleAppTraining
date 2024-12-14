@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>CAtasks.Task12_HybridInheritance</StartupObject>
+    <StartupObject>CAtasks.Task13_PartialMethod</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -59,6 +59,7 @@
     <Compile Include="7. Task7_JaggedArray.cs" />
     <Compile Include="8. Task8_DynamicJaggedArray.cs" />
     <Compile Include="9. Task9_OperatorOverloading.cs" />
+    <Compile Include="Task13_PartialMethod.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
