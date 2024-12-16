@@ -48,7 +48,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Task10_ConstructorChaining.cs" />
-    <Compile Include="Task11_Method%28Over,Hinding%29.cs" />
+    <Compile Include="Task11_Method%28OverLoa,Hiding%29.cs" />
     <Compile Include="Task12_HybridInheritance.cs" />
     <Compile Include="1. Task1_salary.cs" />
     <Compile Include="2. Task2_numbers.cs" />

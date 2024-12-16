@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>CApractice.arrayhelper</StartupObject>
+    <StartupObject>CApractice.Shopping</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -64,6 +64,7 @@
     <Compile Include="ReverseArray.cs" />
     <Compile Include="ReverseNumber.cs" />
     <Compile Include="ReverseString.cs" />
+    <Compile Include="Shopping.cs" />
     <Compile Include="StudentInformation.cs" />
   </ItemGroup>
   <ItemGroup>
