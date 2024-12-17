@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>CAtasks.Task14_GenericCollections</StartupObject>
+    <StartupObject>CAtasks.Task15_DictionaryExample</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -61,6 +61,7 @@
     <Compile Include="9. Task9_OperatorOverloading.cs" />
     <Compile Include="Task13_PartialMethod.cs" />
     <Compile Include="Task14_GenericCollections.cs" />
+    <Compile Include="Task15_DictionaryExample.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
