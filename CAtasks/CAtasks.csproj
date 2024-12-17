@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>CAtasks.Task13_PartialMethod</StartupObject>
+    <StartupObject>CAtasks.Task14_GenericCollections</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -60,6 +60,7 @@
     <Compile Include="8. Task8_DynamicJaggedArray.cs" />
     <Compile Include="9. Task9_OperatorOverloading.cs" />
     <Compile Include="Task13_PartialMethod.cs" />
+    <Compile Include="Task14_GenericCollections.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
