@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAoops", "CAoops\CAoops.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CACode", "CACode\CACode.csproj", "{CC3E22D9-A976-45C1-811F-39CBFB00E395}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAdatabase", "CAdatabase\CAdatabase.csproj", "{58DF1B97-2FB3-4200-B324-D7FB9D848233}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{CC3E22D9-A976-45C1-811F-39CBFB00E395}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC3E22D9-A976-45C1-811F-39CBFB00E395}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC3E22D9-A976-45C1-811F-39CBFB00E395}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58DF1B97-2FB3-4200-B324-D7FB9D848233}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58DF1B97-2FB3-4200-B324-D7FB9D848233}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58DF1B97-2FB3-4200-B324-D7FB9D848233}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58DF1B97-2FB3-4200-B324-D7FB9D848233}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
