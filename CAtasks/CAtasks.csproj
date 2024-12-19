@@ -33,10 +33,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>CAtasks.Task15_DictionaryExample</StartupObject>
+    <StartupObject>CAtasks.Task16_DataBase</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -62,6 +63,7 @@
     <Compile Include="Task13_PartialMethod.cs" />
     <Compile Include="Task14_GenericCollections.cs" />
     <Compile Include="Task15_DictionaryExample.cs" />
+    <Compile Include="Task16_DataBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
