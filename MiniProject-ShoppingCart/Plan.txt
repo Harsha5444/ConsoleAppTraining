@@ -1,0 +1,29 @@
+﻿MiniProject/
+├── Program.cs                  # Main entry point.
+├── Models/
+│   ├── User.cs                 # User model class.
+│   ├── Product.cs              # Product model class.
+│   └── Cart.cs                 # Cart model class.
+├── DataAccess/
+│   ├── DbHelper.cs             # Handles database connection from app.config.
+│   ├── UserRepository.cs       # Executes stored procedures for user operations.
+│   ├── ProductRepository.cs    # Executes stored procedures for product operations.
+│   ├── CartRepository.cs       # Executes stored procedures for cart operations.
+│   └── OrderRepository.cs      # Executes stored procedures for order operations.
+├── app.config                  # Contains database connection string.
+
+
+
+----Database Tables----
+
+Registration Table:
+Columns: id, name, username, password, mobile_number
+
+Product Table:
+Columns: product_id, product_name, price, qty_available
+
+Cart Table:
+Columns: cart_id, product_id, username, qty, final_price
+
+Order Table:
+Columns: order_id, username, total_cost

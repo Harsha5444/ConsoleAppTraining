@@ -5,13 +5,13 @@ using System.Configuration;
 
 namespace CAtasks
 {
-    class Task16_DataBase
+    class Task17_DataBase
     {
         private SqlConnection conn;
 
         static void Main(string[] args)
         {
-            Task16_DataBase db = new Task16_DataBase();
+            Task17_DataBase db = new Task17_DataBase();
             db.RunApplication();
             Console.ReadLine();
         }
@@ -67,25 +67,7 @@ namespace CAtasks
 
         public void PerformInsert()
         {
-            Console.WriteLine("Enter Employee Details for Insertion:");
-            Console.Write("Employee Number: ");
-            int eno = int.Parse(Console.ReadLine());
-            Console.Write("Employee Name: ");
-            string ename = Console.ReadLine();
-            Console.Write("Job: ");
-            string job = Console.ReadLine();
-            Console.Write("Salary: ");
-            decimal salary = decimal.Parse(Console.ReadLine());
-            Console.Write("Department: ");
-            string dept = Console.ReadLine();
-
-            SqlCommand cmd = new SqlCommand("usp_insert_employee", conn);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@eno", eno);
-            cmd.Parameters.AddWithValue("@ename", ename);
-            cmd.Parameters.AddWithValue("@job", job);
-            cmd.Parameters.AddWithValue("@salary", salary);
-            cmd.Parameters.AddWithValue("@dept", dept);
+            SqlCommand cmd = GetEmployeeDetailsCommand("usp_insert_employee");
 
             int rowsAffected = cmd.ExecuteNonQuery();
             Console.WriteLine(rowsAffected > 0 ? "Employee inserted successfully." : "Insertion failed.");
@@ -93,25 +75,7 @@ namespace CAtasks
 
         public void PerformUpdate()
         {
-            Console.WriteLine("Enter Employee Details for Update:");
-            Console.Write("Employee Number: ");
-            int eno = int.Parse(Console.ReadLine());
-            Console.Write("Employee Name: ");
-            string ename = Console.ReadLine();
-            Console.Write("Job: ");
-            string job = Console.ReadLine();
-            Console.Write("Salary: ");
-            decimal salary = decimal.Parse(Console.ReadLine());
-            Console.Write("Department: ");
-            string dept = Console.ReadLine();
-
-            SqlCommand cmd = new SqlCommand("usp_update_employee", conn);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@eno", eno);
-            cmd.Parameters.AddWithValue("@ename", ename);
-            cmd.Parameters.AddWithValue("@job", job);
-            cmd.Parameters.AddWithValue("@salary", salary);
-            cmd.Parameters.AddWithValue("@dept", dept);
+            SqlCommand cmd = GetEmployeeDetailsCommand("usp_update_employee");
 
             int rowsAffected = cmd.ExecuteNonQuery();
             Console.WriteLine(rowsAffected > 0 ? "Employee updated successfully." : "Update failed.");
@@ -131,6 +95,36 @@ namespace CAtasks
             Console.WriteLine(rowsAffected > 0 ? "Employee deleted successfully." : "Deletion failed.");
         }
 
+        public SqlCommand GetEmployeeDetailsCommand(string storedProcedure)
+        {
+            Console.WriteLine("Enter Employee Details:");
+
+            Console.Write("Employee Number: ");
+            int eno = int.Parse(Console.ReadLine());
+
+            Console.Write("Employee Name: ");
+            string ename = Console.ReadLine();
+
+            Console.Write("Job: ");
+            string job = Console.ReadLine();
+
+            Console.Write("Salary: ");
+            decimal salary = decimal.Parse(Console.ReadLine());
+
+            Console.Write("Department: ");
+            string dept = Console.ReadLine();
+
+            SqlCommand cmd = new SqlCommand(storedProcedure, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@eno", eno);
+            cmd.Parameters.AddWithValue("@ename", ename);
+            cmd.Parameters.AddWithValue("@job", job);
+            cmd.Parameters.AddWithValue("@salary", salary);
+            cmd.Parameters.AddWithValue("@dept", dept);
+
+            return cmd;
+        }
         public void CloseConnection()
         {
             if (conn != null && conn.State == ConnectionState.Open)

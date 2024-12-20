@@ -1,0 +1,187 @@
+﻿-- Create Database
+CREATE DATABASE MiniProjectDB;
+GO
+
+-- Use Database
+USE MiniProjectDB;
+GO
+-------------------------------------------------
+ Create Users Table
+CREATE TABLE Users (
+    UserId INT IDENTITY(1,1) PRIMARY KEY,
+    FullName NVARCHAR(100) NOT NULL,
+    Username NVARCHAR(50) NOT NULL UNIQUE,
+    Password NVARCHAR(50) NOT NULL,
+    MobileNumber NVARCHAR(15) NOT NULL
+);
+-------------------------------------------------
+-- Create Products Table
+CREATE TABLE Products (
+    ProductId INT IDENTITY(1,1) PRIMARY KEY,
+    ProductName NVARCHAR(100) NOT NULL,
+    Price INT NOT NULL,
+    QuantityAvailable INT NOT NULL
+);
+-------------------------------------------------
+-- Create Cart Table
+CREATE TABLE Cart (
+    CartId INT IDENTITY(1,1) PRIMARY KEY,
+    ProductId INT NOT NULL,
+    Username NVARCHAR(50) NOT NULL,
+    Quantity INT NOT NULL,
+    FinalPrice INT NOT NULL,
+    FOREIGN KEY (ProductId) REFERENCES Products(ProductId),
+    FOREIGN KEY (Username) REFERENCES Users(Username)
+);
+-------------------------------------------------
+-- Create Orders Table
+CREATE TABLE Orders (
+    OrderId INT IDENTITY(1,1) PRIMARY KEY,
+    Username NVARCHAR(50) NOT NULL,
+    TotalCost INT NOT NULL,
+    FOREIGN KEY (Username) REFERENCES Users(Username)
+);
+-------------------------------------------------
+-- Insert Sample Data into Users Table
+INSERT INTO Users (FullName, Username, Password, MobileNumber)
+VALUES 
+    ('Alice Johnson', 'alicej', 'password123', '9876543210'),
+    ('Bob Smith', 'bobsmith', 'mypassword', '9876543211'),
+    ('Charlie Brown', 'charlieb', 'securepass', '9876543212');
+-------------------------------------------------
+-- Insert Sample Data into Products Table
+INSERT INTO Products (ProductName, Price, QuantityAvailable)
+VALUES 
+    ('Oppo', 12000, 4),     
+    ('Oneplus', 45555, 2),  
+    ('Iphone15', 60000, 2), 
+    ('Samsung Galaxy S23', 74999, 3), 
+    ('Google Pixel 8', 65999, 5),     
+    ('Vivo V27 Pro', 37999, 7);
+-------------------------------------------------
+ Verification Queries
+SELECT * FROM Users;
+SELECT * FROM Products;
+SELECT * FROM Cart;
+SELECT * FROM Orders;
+-------------------------------------------------
+CREATE PROCEDURE RegisterUser
+    @FullName NVARCHAR(100),
+    @Username NVARCHAR(50),
+    @Password NVARCHAR(50),
+    @MobileNumber NVARCHAR(15)
+AS
+BEGIN
+    IF EXISTS (SELECT 1 FROM Users WHERE Username = @Username)
+    BEGIN
+        RAISERROR('Username already exists.', 16, 1);
+        RETURN;
+    END
+
+    INSERT INTO Users (FullName, Username, Password, MobileNumber)
+    VALUES (@FullName, @Username, @Password, @MobileNumber);
+END;
+-------------------------------------------------
+CREATE PROCEDURE UserLogin
+    @Username NVARCHAR(50),
+    @Password NVARCHAR(50)
+AS
+BEGIN
+    IF EXISTS (SELECT 1 FROM Users WHERE Username = @Username AND Password = @Password)
+    BEGIN
+        PRINT 'Login successful';
+    END
+    ELSE
+    BEGIN
+        RAISERROR('Invalid username or password.', 16, 1);
+    END
+END;
+-------------------------------------------------
+CREATE PROCEDURE GetProductList
+AS
+BEGIN
+    SELECT ProductId, ProductName, Price, QuantityAvailable
+    FROM Products
+    WHERE QuantityAvailable > 0;
+END;
+-------------------------------------------------
+CREATE PROCEDURE AddToCart
+    @ProductId INT,
+    @Username NVARCHAR(50),
+    @Quantity INT
+AS
+BEGIN
+    DECLARE @Price INT;
+
+    SELECT @Price = Price 
+    FROM Products 
+    WHERE ProductId = @ProductId;
+
+    IF @Price IS NULL
+    BEGIN
+        RAISERROR('Invalid ProductId.', 16, 1);
+        RETURN;
+    END
+
+    DECLARE @AvailableQty INT;
+    SELECT @AvailableQty = QuantityAvailable 
+    FROM Products 
+    WHERE ProductId = @ProductId;
+
+    IF @AvailableQty < @Quantity
+    BEGIN
+        RAISERROR('Insufficient stock.', 16, 1);
+        RETURN;
+    END
+
+    -- Calculate Final Price
+    DECLARE @FinalPrice INT = @Price * @Quantity;
+
+    -- Insert into Cart
+    INSERT INTO Cart (ProductId, Username, Quantity, FinalPrice)
+    VALUES (@ProductId, @Username, @Quantity, @FinalPrice);
+
+    -- Reduce stock in Products
+    UPDATE Products
+    SET QuantityAvailable = QuantityAvailable - @Quantity
+    WHERE ProductId = @ProductId;
+END;
+-------------------------------------------------
+CREATE PROCEDURE PlaceOrder
+    @Username NVARCHAR(50)
+AS
+BEGIN
+    DECLARE @TotalCost INT = 0;
+
+    -- Calculate Total Cost
+    SELECT @TotalCost = SUM(FinalPrice)
+    FROM Cart
+    WHERE Username = @Username;
+
+    IF @TotalCost = 0
+    BEGIN
+        RAISERROR('Cart is empty.', 16, 1);
+        RETURN;
+    END
+
+    -- Insert into Orders
+    INSERT INTO Orders (Username, TotalCost)
+    VALUES (@Username, @TotalCost);
+
+    -- Clear User Cart
+    DELETE FROM Cart
+    WHERE Username = @Username;
+
+    PRINT 'Order placed successfully. Total cost: ' + CAST(@TotalCost AS NVARCHAR(20));
+END;
+-------------------------------------------------
+CREATE PROCEDURE ViewCart
+    @Username NVARCHAR(50)
+AS
+BEGIN
+    SELECT c.CartId, p.ProductName, c.Quantity, c.FinalPrice
+    FROM Cart c
+    JOIN Products p ON c.ProductId = p.ProductId
+    WHERE c.Username = @Username;
+END;
+-------------------------------------------------
