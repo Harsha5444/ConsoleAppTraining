@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>CAtasks.Task16_UpdateUsingStringinterpolation</StartupObject>
+    <StartupObject>CAtasks.Task18_DataAdapter</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -64,7 +64,8 @@
     <Compile Include="Task14_GenericCollections.cs" />
     <Compile Include="Task15_DictionaryExample.cs" />
     <Compile Include="Task16_UpdateUsingStringinterpolation.cs" />
-    <Compile Include="Task17.1_DataBase.cs" />
+    <Compile Include="Task17_DataBase.cs" />
+    <Compile Include="Task18_DataAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
