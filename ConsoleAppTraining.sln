@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAdatabase", "CAdatabase\CA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniProject-ShoppingCart", "MiniProject-ShoppingCart\MiniProject-ShoppingCart.csproj", "{5410E359-AE32-433E-BB8B-159BDC7EA50A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CALinQ", "CALinQ\CALinQ.csproj", "{ED354F49-746D-4C98-9A6B-6B9D5DA43281}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{5410E359-AE32-433E-BB8B-159BDC7EA50A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5410E359-AE32-433E-BB8B-159BDC7EA50A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5410E359-AE32-433E-BB8B-159BDC7EA50A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED354F49-746D-4C98-9A6B-6B9D5DA43281}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED354F49-746D-4C98-9A6B-6B9D5DA43281}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED354F49-746D-4C98-9A6B-6B9D5DA43281}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED354F49-746D-4C98-9A6B-6B9D5DA43281}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

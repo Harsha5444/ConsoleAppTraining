@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CD18CEF0-836F-4341-8B29-14D4899DF407}</ProjectGuid>
+    <ProjectGuid>{ED354F49-746D-4C98-9A6B-6B9D5DA43281}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>CAtasks</RootNamespace>
-    <AssemblyName>CAtasks</AssemblyName>
+    <RootNamespace>CALinQ</RootNamespace>
+    <AssemblyName>CALinQ</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -32,12 +32,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject>CAtasks.Task19_LINQExample3</StartupObject>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -47,28 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Task10_ConstructorChaining.cs" />
-    <Compile Include="Task11_Method%28OverLoa,Hiding%29.cs" />
-    <Compile Include="Task12_HybridInheritance.cs" />
-    <Compile Include="1. Task1_salary.cs" />
-    <Compile Include="2. Task2_numbers.cs" />
-    <Compile Include="3. Task3_calculator.cs" />
-    <Compile Include="4. Task4_shopping.cs" />
-    <Compile Include="5. Task5_Arrays.cs" />
-    <Compile Include="6. Task6_DynamicArrays.cs" />
-    <Compile Include="7. Task7_JaggedArray.cs" />
-    <Compile Include="8. Task8_DynamicJaggedArray.cs" />
-    <Compile Include="9. Task9_OperatorOverloading.cs" />
-    <Compile Include="Task13_PartialMethod.cs" />
-    <Compile Include="Task14_GenericCollections.cs" />
-    <Compile Include="Task15_DictionaryExample.cs" />
-    <Compile Include="Task16_UpdateUsingStringinterpolation.cs" />
-    <Compile Include="Task17_DataBase.cs" />
-    <Compile Include="Task18_DataAdapter.cs" />
-    <Compile Include="Task19_LINQExample1.cs" />
-    <Compile Include="Task19_LINQExample2.cs" />
-    <Compile Include="Task19_LINQExample3.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
