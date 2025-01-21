@@ -43,12 +43,12 @@ namespace CAMethods_Functions
         // Add constructors and methods
     }
 
-    class GradeManager
-    {
-        private List<Student> students;
+    //class GradeManager
+    //{
+    //    private List<Student> students;
 
-        // Implement your methods here
-    }
+    //    // Implement your methods here
+    //}
 
     // Add extension methods here
 

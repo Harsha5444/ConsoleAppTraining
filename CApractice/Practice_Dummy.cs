@@ -6,7 +6,7 @@ namespace CApractice
     class Employee
     {
         int empId; string empName; double salary;
-        string city; string state;string role; string depot;int id;
+        string city; string state;
 
         public Employee(int empId, string empName, double salary , Employee loc)
         {
