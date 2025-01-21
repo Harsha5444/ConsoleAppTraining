@@ -1,0 +1,1985 @@
+Great! Let's dive straight into Week 2, which is all about Delegates, Anonymous Methods, and Events in C#. I'll guide you through each concept with detailed examples and provide a deeper understanding of how they work. Let's get started!
+
+
+
+ Week 2: Delegates and Events
+
+ Day 5: Introduction to Delegates
+
+A delegate in C# is a type-safe function pointer, which means it allows you to reference methods and invoke them indirectly. Delegates are used when you want to pass methods as parameters, and it’s a key concept in event-driven programming.
+
+ 5.1. Understanding Delegates
+
+A delegate is essentially a type that defines the signature of a method, and it can hold references to methods that match that signature. This allows you to invoke methods dynamically at runtime.
+
+- Syntax for declaring a delegate:
+  
+  delegate return_type DelegateName(parameters);
+  
+
+- Example: 
+  Here's a simple example where we define a delegate and associate it with methods.
+
+  
+  using System;
+
+  namespace DelegateExample
+  {
+      // Declaring a delegate
+      delegate void PrintMessageDelegate(string message);
+
+      class Program
+      {
+          // Method that matches the delegate signature
+          static void PrintMessage(string message)
+          {
+              Console.WriteLine("Message: " + message);
+          }
+
+          static void Main(string[] args)
+          {
+              // Create an instance of the delegate, pointing to PrintMessage method
+              PrintMessageDelegate printDel = new PrintMessageDelegate(PrintMessage);
+              
+              // Call the method via the delegate
+              printDel("Hello, Delegates!");
+
+              // You can also call the method directly
+              PrintMessage("Direct method call");
+          }
+      }
+  }
+  
+
+ 5.2. How Delegates Work
+
+- A delegate holds a reference to a method that matches the delegate’s signature.
+- When you call the delegate, it internally invokes the referenced method.
+- Delegates can point to multiple methods (multicast delegate), so you can call several methods using one delegate.
+
+ Example: Multicast Delegates
+
+
+using System;
+
+namespace DelegateExample
+{
+    // Delegate declaration
+    delegate void Notify(string message);
+
+    class Program
+    {
+        // Methods matching the delegate signature
+        static void SendEmail(string message)
+        {
+            Console.WriteLine("Email Sent: " + message);
+        }
+
+        static void SendSMS(string message)
+        {
+            Console.WriteLine("SMS Sent: " + message);
+        }
+
+        static void Main(string[] args)
+        {
+            // Create a delegate that can call both methods
+            Notify notifyDelegate = SendEmail;
+            notifyDelegate += SendSMS;  // Adding another method to the delegate
+
+            // Invoking the delegate will now call both methods
+            notifyDelegate("Meeting at 10 AM");
+        }
+    }
+}
+
+
+- Explanation:
+  - The `notifyDelegate` initially references the `SendEmail` method.
+  - We use `+=` to add the `SendSMS` method.
+  - When the delegate is invoked, both methods are called (multicast delegate).
+
+
+
+ Today's Task:
+1. Create a delegate that accepts a parameter and returns a result. 
+2. Implement multicast delegates by adding multiple methods to the same delegate and calling them.
+
+
+
+ Day 6: Anonymous Methods and Events
+
+ 6.1. Anonymous Methods
+
+An anonymous method is a method that does not have a name but is defined inline where it is used. You can use anonymous methods to implement delegates without needing to define a separate method.
+
+- Syntax: 
+  
+  delegate_type delegate_name = delegate(parameter_list) { method_body };
+  
+
+- Example: 
+  Here's an example that demonstrates using an anonymous method with a delegate.
+
+  
+  using System;
+
+  namespace AnonymousMethodExample
+  {
+      class Program
+      {
+          static void Main(string[] args)
+          {
+              // Create a delegate with an anonymous method
+              Action<string> greet = delegate(string name)
+              {
+                  Console.WriteLine("Hello, " + name);
+              };
+
+              // Invoke the anonymous method via the delegate
+              greet("John");
+              greet("Jane");
+          }
+      }
+  }
+  
+
+- Explanation:
+  - The `Action<string>` delegate is defined inline with an anonymous method that prints a greeting message.
+  - You don't need to define a named method—this is a quick and effective way to use delegates.
+
+ 6.2. Using Events with Delegates
+
+In C#, events are based on delegates. An event is a way to provide notifications to other classes or components that something has happened (like a button click, a timer event, etc.).
+
+- Syntax for declaring an event:
+  
+  public event delegate_type EventName;
+  
+
+- Example: 
+  Let's simulate a button click event using delegates and events.
+
+  
+  using System;
+
+  namespace EventExample
+  {
+      // Declare a delegate
+      delegate void ButtonClickDelegate(string message);
+
+      class Button
+      {
+          // Declare an event based on the delegate
+          public event ButtonClickDelegate ButtonClicked;
+
+          // Method to trigger the event
+          public void Click(string message)
+          {
+              // Check if the event has any subscribers
+              ButtonClicked?.Invoke(message);
+          }
+      }
+
+      class Program
+      {
+          static void Main(string[] args)
+          {
+              Button button = new Button();
+
+              // Subscribe to the ButtonClicked event with an anonymous method
+              button.ButtonClicked += delegate(string message)
+              {
+                  Console.WriteLine("Button clicked! " + message);
+              };
+
+              // Trigger the event
+              button.Click("Hello from the button");
+          }
+      }
+  }
+  
+
+- Explanation:
+  - The `Button` class defines an event `ButtonClicked` based on the `ButtonClickDelegate` delegate.
+  - We subscribe to the `ButtonClicked` event with an anonymous method.
+  - When the `Click()` method is called, it triggers the event, which in turn invokes the subscribed method.
+
+
+
+ Today's Task:
+1. Create an anonymous method that takes two numbers and prints their sum.
+2. Simulate an event: Create a class that has an event (e.g., `TaskCompleted`), and trigger it using an event handler.
+
+
+
+ Day 7: Combining Delegates and Events
+
+ 7.1. Event Handling in C#
+
+In real-world applications, delegates and events are often used together. An event might be triggered when something happens, and methods that are event handlers can respond to that event.
+
+- Event handler methods are special methods that handle events.
+- Event handlers usually follow a specific signature (matching the delegate type).
+
+ Example: 
+Here’s a more complex example where we combine delegates and events.
+
+
+using System;
+
+namespace EventHandlerExample
+{
+    // Delegate to define the signature of event handlers
+    delegate void TaskEventHandler(string taskName);
+
+    class TaskManager
+    {
+        // Declare an event
+        public event TaskEventHandler TaskCompleted;
+
+        // Method to trigger the event
+        public void CompleteTask(string taskName)
+        {
+            Console.WriteLine("Task Completed: " + taskName);
+            TaskCompleted?.Invoke(taskName);  // Trigger the event
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            TaskManager manager = new TaskManager();
+
+            // Subscribe to the event
+            manager.TaskCompleted += TaskCompletedHandler;
+
+            // Complete a task (this will trigger the event)
+            manager.CompleteTask("Write C# Course");
+        }
+
+        // Event handler method
+        static void TaskCompletedHandler(string taskName)
+        {
+            Console.WriteLine("Event triggered: Task '" + taskName + "' is now completed.");
+        }
+    }
+}
+
+
+- Explanation:
+  - The `TaskManager` class defines an event `TaskCompleted`.
+  - The `CompleteTask()` method triggers the event once a task is completed.
+  - We subscribe to the event with the `TaskCompletedHandler` method, which is invoked when the event is triggered.
+
+
+
+ Today's Task:
+1. Create an event handler that logs a message when a certain task is completed.
+2. Modify the `Button` class from the previous example to handle multiple button click events.
+
+
+
+ Tomorrow:
+We'll go deeper into lambda expressions and LINQ to learn how we can use delegates and events more powerfully.
+
+
+
+Feel free to ask any questions or share your progress, and I will be happy to assist you further! Let’s keep learning!
+
+
+ Day 8: Lambda Expressions in Depth
+
+Welcome to Day 8! Today, we’ll focus on Lambda Expressions in C#, which is a powerful and concise way to define anonymous methods or functions. We’ll also explore how to use them with delegates and LINQ queries. Let's start with the basics and go deep into how they work.
+
+
+
+ 8.1. Introduction to Lambda Expressions
+
+A lambda expression is a short syntax for defining anonymous methods. It provides a concise way to represent a function or delegate and is used primarily in LINQ queries, event handling, and anywhere you would use a delegate.
+
+ Syntax of Lambda Expressions
+
+The syntax of a lambda expression is:
+
+
+(parameters) => expression
+
+
+- Parameters: The input parameters the function accepts.
+- Arrow (`=>`): The arrow separates parameters from the body of the expression.
+- Expression: The code that defines what the lambda will do (this can be a single line or a block of code).
+
+ Example: Simple Lambda Expression
+
+
+using System;
+
+namespace LambdaExample
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Lambda expression for adding two numbers
+            Func<int, int, int> add = (a, b) => a + b;
+
+            // Invoke the lambda expression
+            int result = add(3, 4);
+
+            Console.WriteLine("Result: " + result);  // Output: Result: 7
+        }
+    }
+}
+
+
+- Explanation:
+  - We defined a lambda expression `(a, b) => a + b` that adds two integers `a` and `b`.
+  - `Func<int, int, int>` is a delegate type that takes two `int` parameters and returns an `int`.
+  - The lambda expression is assigned to the `add` variable, and then it’s called with `3` and `4` as arguments.
+
+
+
+ 8.2. Why Lambda Expressions Are Useful
+
+- Conciseness: Lambdas are much more compact than regular methods.
+- Readability: Lambda expressions are often easier to read, especially in LINQ queries.
+- Anonymous Methods: You don’t need to declare a method explicitly.
+- Flexibility: You can pass lambdas around just like regular methods.
+
+ 8.3. Using Lambdas with Delegates
+
+Lambda expressions are often used with delegates, where you pass a lambda instead of a named method.
+
+- Example: Passing Lambda to a Delegate
+
+
+using System;
+
+namespace DelegateWithLambda
+{
+    // Delegate declaration
+    delegate void MessageDelegate(string message);
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Passing lambda to delegate
+            MessageDelegate printMessage = message => Console.WriteLine(message);
+
+            // Invoking delegate
+            printMessage("Hello from Lambda!");
+        }
+    }
+}
+
+
+- Explanation:
+  - We use a lambda expression to define the method for the `MessageDelegate` delegate.
+  - The lambda `message => Console.WriteLine(message)` replaces a traditional method.
+
+
+
+ 8.4. Lambda Expressions with LINQ
+
+Lambda expressions shine when used with LINQ (Language Integrated Query) for querying collections like arrays, lists, and more. With LINQ, you can filter, sort, and manipulate data in a very concise way.
+
+ 8.5. LINQ and Lambda: Filtering a List of Numbers
+
+Let's work with LINQ and use a lambda expression to filter a collection of numbers.
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace LINQLambdaExample
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Sample collection of numbers
+            List<int> numbers = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+
+            // Using LINQ with lambda expression to find even numbers
+            var evenNumbers = numbers.Where(n => n % 2 == 0);
+
+            // Display the result
+            Console.WriteLine("Even numbers:");
+            foreach (var number in evenNumbers)
+            {
+                Console.WriteLine(number);
+            }
+        }
+    }
+}
+
+
+- Explanation:
+  - We use the `Where` method to filter the collection of numbers.
+  - The lambda expression `n => n % 2 == 0` defines the condition for filtering (selecting even numbers).
+  - `Where` is a LINQ method that takes a lambda to determine which elements to keep.
+
+ 8.6. LINQ and Lambda: Sorting a List of Students
+
+Let’s say we have a list of students, and we want to sort them by name using a lambda expression in LINQ.
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace LINQLambdaSortingExample
+{
+    class Student
+    {
+        public string Name { get; set; }
+        public int Age { get; set; }
+
+        public Student(string name, int age)
+        {
+            Name = name;
+            Age = age;
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // List of students
+            List<Student> students = new List<Student>
+            {
+                new Student("Alice", 21),
+                new Student("Bob", 22),
+                new Student("Charlie", 23),
+                new Student("Dave", 20)
+            };
+
+            // Using LINQ to sort students by name
+            var sortedStudents = students.OrderBy(s => s.Name);
+
+            // Display the sorted list
+            Console.WriteLine("Sorted Students:");
+            foreach (var student in sortedStudents)
+            {
+                Console.WriteLine(student.Name + " - " + student.Age);
+            }
+        }
+    }
+}
+
+
+- Explanation:
+  - `OrderBy(s => s.Name)` is a LINQ method that sorts the students by their `Name` property.
+  - The lambda `s => s.Name` specifies how the sorting is to be done.
+  - LINQ provides a clean and expressive way to handle sorting with lambda.
+
+
+
+ Today's Task:
+1. Create a list of numbers and use LINQ with lambda to find the sum of all odd numbers.
+2. Create a class `Book` with properties `Title`, `Author`, and `Price`, and use LINQ to sort books by `Price` using a lambda expression.
+
+
+
+ Day 9: Advanced Lambda Expressions
+
+Tomorrow, we’ll explore more advanced topics around lambda expressions, including closures and delegates with multiple parameters. You'll learn how to apply lambda expressions more flexibly in real-world applications.
+
+
+
+Let me know if you need any further clarifications on today's lesson, or if you'd like to proceed with the next task! Keep practicing the examples, and let me know if you're ready for more!
+
+ Day 9: Advanced Lambda Expressions
+
+Welcome to Day 9! Today, we'll dive deeper into advanced lambda expressions and explore concepts like closures and delegates with multiple parameters. Understanding these concepts will help you use lambdas effectively in complex scenarios.
+
+
+
+ 9.1. Closures in Lambda Expressions
+
+A closure is a function or lambda expression that captures and remembers the variables from its surrounding scope, even after the scope has ended.
+
+ What is a Closure?
+A closure allows a lambda to "close over" variables from the outer scope. When you pass a lambda as an argument or assign it to a variable, it maintains access to any variables or parameters in its enclosing scope, even if the scope has finished execution.
+
+# Example: Using Closures in Lambda Expressions
+
+
+using System;
+
+namespace LambdaClosureExample
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Outer variable
+            int outerValue = 10;
+
+            // Lambda expression that closes over outerValue
+            Func<int, int> addToOuterValue = (innerValue) => innerValue + outerValue;
+
+            // Calling the lambda with a value
+            Console.WriteLine(addToOuterValue(5)); // Output: 15
+        }
+    }
+}
+
+
+ Explanation:
+- `outerValue` is a variable defined outside the lambda.
+- The lambda expression `(innerValue) => innerValue + outerValue` "captures" `outerValue` and "remembers" it when the lambda is invoked later.
+- Even though `outerValue` is defined outside the lambda, the lambda still has access to it, forming a closure.
+
+ Key Points About Closures:
+1. Captured Variables: The lambda can access variables from the outer scope, even if the scope has finished execution.
+2. State Retention: The lambda can retain the state of the captured variables between calls.
+3. Memory Considerations: Closures can sometimes result in unexpected memory usage, especially when capturing large objects.
+
+
+
+ 9.2. Delegates with Multiple Parameters
+
+Lambda expressions can be used with delegates that take multiple parameters. This allows you to pass lambdas that work with more than one value.
+
+ Example: Lambda with Multiple Parameters
+
+
+using System;
+
+namespace DelegateWithMultipleParams
+{
+    class Program
+    {
+        // Delegate with two parameters
+        delegate int MathOperation(int x, int y);
+
+        static void Main(string[] args)
+        {
+            // Using lambda for addition operation
+            MathOperation add = (x, y) => x + y;
+
+            // Using lambda for multiplication operation
+            MathOperation multiply = (x, y) => x * y;
+
+            // Invoke the lambdas
+            Console.WriteLine("Addition: " + add(5, 3));       // Output: Addition: 8
+            Console.WriteLine("Multiplication: " + multiply(5, 3)); // Output: Multiplication: 15
+        }
+    }
+}
+
+
+ Explanation:
+- The delegate `MathOperation` takes two `int` parameters, and we define two lambda expressions for addition and multiplication.
+- The lambdas `(x, y) => x + y` and `(x, y) => x * y` define the operations.
+- You can pass multiple parameters in a lambda expression, which is the same as defining methods that accept multiple parameters.
+
+
+
+ 9.3. Using Lambda Expressions in LINQ with Multiple Parameters
+
+Lambda expressions are frequently used in LINQ queries, and they can also handle more complex logic involving multiple parameters.
+
+ Example: LINQ with Multiple Parameters
+
+Let’s say you have a list of `Product` objects and you want to filter based on both `Category` and `Price`.
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace LINQWithMultipleParams
+{
+    class Product
+    {
+        public string Name { get; set; }
+        public string Category { get; set; }
+        public decimal Price { get; set; }
+
+        public Product(string name, string category, decimal price)
+        {
+            Name = name;
+            Category = category;
+            Price = price;
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Sample list of products
+            List<Product> products = new List<Product>
+            {
+                new Product("Laptop", "Electronics", 1200),
+                new Product("Shirt", "Apparel", 40),
+                new Product("Phone", "Electronics", 800),
+                new Product("Jeans", "Apparel", 60)
+            };
+
+            // LINQ query with multiple parameters (Category and Price)
+            var filteredProducts = products.Where(p => p.Category == "Electronics" && p.Price > 500);
+
+            // Display the result
+            foreach (var product in filteredProducts)
+            {
+                Console.WriteLine($"{product.Name} - {product.Category} - {product.Price}");
+            }
+        }
+    }
+}
+
+
+ Explanation:
+- The lambda expression `p => p.Category == "Electronics" && p.Price > 500` uses multiple parameters (`p.Category` and `p.Price`) to filter the products.
+- LINQ's `Where` method takes the lambda and applies the condition to each element in the collection.
+- This is an example of filtering with multiple parameters using lambda expressions.
+
+
+
+ 9.4. Combining Multiple Lambda Expressions
+
+You can combine multiple lambda expressions to achieve more complex functionality. This is commonly used in LINQ when you need to perform multiple operations like filtering, sorting, and projecting.
+
+ Example: Combining Filters with Lambda Expressions
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace LINQCombinedLambdas
+{
+    class Product
+    {
+        public string Name { get; set; }
+        public string Category { get; set; }
+        public decimal Price { get; set; }
+
+        public Product(string name, string category, decimal price)
+        {
+            Name = name;
+            Category = category;
+            Price = price;
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // List of products
+            List<Product> products = new List<Product>
+            {
+                new Product("Laptop", "Electronics", 1200),
+                new Product("Shirt", "Apparel", 40),
+                new Product("Phone", "Electronics", 800),
+                new Product("Jeans", "Apparel", 60)
+            };
+
+            // Combined filters and sorting
+            var filteredProducts = products
+                .Where(p => p.Category == "Electronics" && p.Price > 500)
+                .OrderBy(p => p.Price);
+
+            // Display the sorted and filtered list
+            foreach (var product in filteredProducts)
+            {
+                Console.WriteLine($"{product.Name} - {product.Category} - {product.Price}");
+            }
+        }
+    }
+}
+
+
+ Explanation:
+- Multiple filters and sorting are combined using method chaining. The `Where` method filters the products, and the `OrderBy` method sorts them by `Price`.
+- Both lambda expressions are applied in a single query to achieve a combined result.
+
+
+
+ Today's Task:
+1. Create a `Person` class with properties `Name`, `Age`, and `City`. Use LINQ with a lambda expression to filter all people who are older than 30 and live in "New York."
+2. Create a lambda expression that takes two strings and returns the longer of the two. Use this lambda to compare two strings and print the result.
+
+
+
+ Day 10: Advanced LINQ with Lambda Expressions
+
+Tomorrow, we will explore advanced LINQ queries, where you’ll learn how to perform grouping, joins, and aggregations with lambda expressions. These concepts are essential for working with larger datasets.
+
+
+
+Let me know if you need any clarification or if you're ready for the next task! Keep practicing with these advanced lambda concepts to deepen your understanding!
+
+ Day 10: Advanced LINQ with Lambda Expressions
+
+Welcome to Day 10! Today, we'll explore advanced LINQ concepts, specifically focusing on grouping, joining, and aggregating with lambda expressions. These are powerful techniques that allow you to work with more complex data structures.
+
+
+
+ 10.1. Grouping Data with Lambda Expressions
+
+Grouping allows you to organize data into categories based on a shared property. In LINQ, you can use `GroupBy` with lambda expressions to group your data.
+
+ Example: Grouping by Property
+
+Suppose you have a list of `Product` objects, and you want to group them by their `Category`.
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace LINQGroupByExample
+{
+    class Product
+    {
+        public string Name { get; set; }
+        public string Category { get; set; }
+        public decimal Price { get; set; }
+
+        public Product(string name, string category, decimal price)
+        {
+            Name = name;
+            Category = category;
+            Price = price;
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Sample list of products
+            List<Product> products = new List<Product>
+            {
+                new Product("Laptop", "Electronics", 1200),
+                new Product("Shirt", "Apparel", 40),
+                new Product("Phone", "Electronics", 800),
+                new Product("Jeans", "Apparel", 60)
+            };
+
+            // Grouping products by category
+            var groupedProducts = products.GroupBy(p => p.Category);
+
+            // Display grouped products
+            foreach (var group in groupedProducts)
+            {
+                Console.WriteLine($"Category: {group.Key}");
+                foreach (var product in group)
+                {
+                    Console.WriteLine($"  {product.Name} - {product.Price}");
+                }
+            }
+        }
+    }
+}
+
+
+ Explanation:
+- The `GroupBy` method is used to group products by the `Category` property.
+- The `group.Key` represents the category name, and each group contains the products in that category.
+- This approach allows you to easily aggregate and organize your data based on specific criteria.
+
+ Output:
+
+Category: Electronics
+  Laptop - 1200
+  Phone - 800
+Category: Apparel
+  Shirt - 40
+  Jeans - 60
+
+
+
+
+ 10.2. Joining Data with Lambda Expressions
+
+Joining data allows you to combine two data sources based on a common key. In LINQ, you can use `Join` to combine data from multiple collections.
+
+ Example: Inner Join
+
+Let’s say we have two collections: `Products` and `Categories`, and we want to join them by `CategoryId` to get the product details along with their category names.
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace LINQJoinExample
+{
+    class Product
+    {
+        public int ProductId { get; set; }
+        public string Name { get; set; }
+        public int CategoryId { get; set; }
+
+        public Product(int productId, string name, int categoryId)
+        {
+            ProductId = productId;
+            Name = name;
+            CategoryId = categoryId;
+        }
+    }
+
+    class Category
+    {
+        public int CategoryId { get; set; }
+        public string CategoryName { get; set; }
+
+        public Category(int categoryId, string categoryName)
+        {
+            CategoryId = categoryId;
+            CategoryName = categoryName;
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // List of products
+            var products = new List<Product>
+            {
+                new Product(1, "Laptop", 1),
+                new Product(2, "Shirt", 2),
+                new Product(3, "Phone", 1),
+                new Product(4, "Jeans", 2)
+            };
+
+            // List of categories
+            var categories = new List<Category>
+            {
+                new Category(1, "Electronics"),
+                new Category(2, "Apparel")
+            };
+
+            // Join products with categories
+            var joinedData = products.Join(categories,
+                p => p.CategoryId,    // Key from products
+                c => c.CategoryId,    // Key from categories
+                (p, c) => new         // Result selector
+                {
+                    ProductName = p.Name,
+                    CategoryName = c.CategoryName,
+                    Price = p.ProductId * 100 // Example of price calculation
+                });
+
+            // Display the joined data
+            foreach (var item in joinedData)
+            {
+                Console.WriteLine($"Product: {item.ProductName}, Category: {item.CategoryName}, Price: {item.Price}");
+            }
+        }
+    }
+}
+
+
+ Explanation:
+- The `Join` method is used to join `products` and `categories` by the `CategoryId`.
+- The lambda expressions `(p, c) => new` are used to define how the resulting objects will look (i.e., combining the product name, category name, and a simple price calculation).
+- You can join two or more collections by specifying a common key and selecting the result format you want.
+
+ Output:
+
+Product: Laptop, Category: Electronics, Price: 100
+Product: Shirt, Category: Apparel, Price: 200
+Product: Phone, Category: Electronics, Price: 300
+Product: Jeans, Category: Apparel, Price: 400
+
+
+
+
+ 10.3. Aggregating Data with Lambda Expressions
+
+Aggregation allows you to perform operations like counting, summing, averaging, etc., on a collection of data. LINQ provides several methods like `Sum`, `Average`, `Count`, and `Max` that work with lambda expressions to perform aggregation.
+
+ Example: Summing Values Using Lambda Expressions
+
+Let’s calculate the total price of all products in the list.
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace LINQAggregationExample
+{
+    class Product
+    {
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+
+        public Product(string name, decimal price)
+        {
+            Name = name;
+            Price = price;
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // List of products
+            List<Product> products = new List<Product>
+            {
+                new Product("Laptop", 1200),
+                new Product("Shirt", 40),
+                new Product("Phone", 800),
+                new Product("Jeans", 60)
+            };
+
+            // Summing prices using lambda
+            decimal totalPrice = products.Sum(p => p.Price);
+
+            // Display the total price
+            Console.WriteLine($"Total Price: {totalPrice}");
+        }
+    }
+}
+
+
+ Explanation:
+- The `Sum` method is used to calculate the total price of all products.
+- The lambda expression `p => p.Price` extracts the price property from each product and sums them.
+
+ Output:
+
+Total Price: 2100
+
+
+
+
+ 10.4. Combining Grouping, Joining, and Aggregation
+
+You can combine grouping, joining, and aggregation to perform complex queries.
+
+ Example: Grouping, Joining, and Summing
+
+Let’s combine these concepts. We’ll group products by their categories, join them with a category list, and then sum the total price for each category.
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace LINQGroupJoinAggregationExample
+{
+    class Product
+    {
+        public int ProductId { get; set; }
+        public string Name { get; set; }
+        public int CategoryId { get; set; }
+        public decimal Price { get; set; }
+
+        public Product(int productId, string name, int categoryId, decimal price)
+        {
+            ProductId = productId;
+            Name = name;
+            CategoryId = categoryId;
+            Price = price;
+        }
+    }
+
+    class Category
+    {
+        public int CategoryId { get; set; }
+        public string CategoryName { get; set; }
+
+        public Category(int categoryId, string categoryName)
+        {
+            CategoryId = categoryId;
+            CategoryName = categoryName;
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // List of products
+            var products = new List<Product>
+            {
+                new Product(1, "Laptop", 1, 1200),
+                new Product(2, "Shirt", 2, 40),
+                new Product(3, "Phone", 1, 800),
+                new Product(4, "Jeans", 2, 60)
+            };
+
+            // List of categories
+            var categories = new List<Category>
+            {
+                new Category(1, "Electronics"),
+                new Category(2, "Apparel")
+            };
+
+            // Grouping, joining, and summing prices by category
+            var groupedAndAggregated = categories.Join(products,
+                c => c.CategoryId,    // Key from categories
+                p => p.CategoryId,    // Key from products
+                (c, p) => new { c.CategoryName, p.Price })
+                .GroupBy(p => p.CategoryName)
+                .Select(g => new
+                {
+                    Category = g.Key,
+                    TotalPrice = g.Sum(p => p.Price)
+                });
+
+            // Display the results
+            foreach (var group in groupedAnd
+
+Aggregated)
+            {
+                Console.WriteLine($"Category: {group.Category}, Total Price: {group.TotalPrice}");
+            }
+        }
+    }
+}
+
+
+ Explanation:
+- Join: Joins products and categories by `CategoryId`.
+- GroupBy: Groups the result by `CategoryName`.
+- Select: Aggregates the price for each category using `Sum`.
+- This combination allows you to easily perform complex queries that involve grouping, joining, and aggregating.
+
+ Output:
+
+Category: Electronics, Total Price: 2000
+Category: Apparel, Total Price: 100
+
+
+
+
+ 10.5. Practice and Exploration
+
+By now, you’ve seen how to work with more advanced LINQ techniques like grouping, joining, and aggregating. For today’s practice:
+
+1. Group products by their category and calculate the average price in each category.
+2. Join two collections (`Order` and `Customer`) based on `CustomerId`, and display the customer names along with the total value of their orders.
+3. Aggregate the total salary for employees by department, and display the results.
+
+
+
+Feel free to explore these concepts and integrate them into your LINQ skill set. Tomorrow, we will explore working with more complex data structures and applying LINQ in real-world scenarios!
+
+ Day 11: Working with Complex Data Structures in LINQ
+
+Welcome to Day 11! Today, we will dive deeper into working with complex data structures using LINQ. You will learn how to manipulate and query nested collections, perform filtering, and extract meaningful data using LINQ.
+
+
+
+ 11.1. Querying Nested Collections
+
+In many real-world applications, you work with nested data structures like collections within collections. LINQ is perfect for handling such data. Let's look at an example where we query nested collections.
+
+ Example: Querying Nested Collections
+
+Imagine you have a list of `Department` objects, and each department has a list of `Employee` objects. We will query the employees based on certain criteria.
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace LINQNestedCollectionExample
+{
+    class Employee
+    {
+        public string Name { get; set; }
+        public int Age { get; set; }
+        public string Department { get; set; }
+
+        public Employee(string name, int age, string department)
+        {
+            Name = name;
+            Age = age;
+            Department = department;
+        }
+    }
+
+    class Department
+    {
+        public string DepartmentName { get; set; }
+        public List<Employee> Employees { get; set; }
+
+        public Department(string departmentName, List<Employee> employees)
+        {
+            DepartmentName = departmentName;
+            Employees = employees;
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Sample data for departments and employees
+            var departments = new List<Department>
+            {
+                new Department("HR", new List<Employee>
+                {
+                    new Employee("Alice", 30, "HR"),
+                    new Employee("Bob", 45, "HR")
+                }),
+                new Department("IT", new List<Employee>
+                {
+                    new Employee("Charlie", 28, "IT"),
+                    new Employee("David", 35, "IT")
+                })
+            };
+
+            // Querying employees from the IT department who are older than 30
+            var itEmployees = departments
+                .Where(d => d.DepartmentName == "IT")    // Filter departments
+                .SelectMany(d => d.Employees)            // Flatten the employee lists
+                .Where(e => e.Age > 30)                 // Filter employees by age
+                .ToList();
+
+            // Display the result
+            foreach (var employee in itEmployees)
+            {
+                Console.WriteLine($"Employee: {employee.Name}, Age: {employee.Age}, Department: {employee.Department}");
+            }
+        }
+    }
+}
+
+
+ Explanation:
+- `Where(d => d.DepartmentName == "IT")`: Filters the departments to select only the "IT" department.
+- `SelectMany(d => d.Employees)`: Flattens the list of employees in the selected department.
+- `Where(e => e.Age > 30)`: Filters the employees to select those who are older than 30.
+- `ToList()`: Converts the result into a list for further manipulation or display.
+
+ Output:
+
+Employee: David, Age: 35, Department: IT
+
+
+
+
+ 11.2. Working with Multiple Levels of Nesting
+
+Sometimes, you might have multiple levels of nesting, like a `Customer` with a list of `Orders`, and each `Order` contains a list of `Items`. In these cases, LINQ can be used to query and manipulate such deep nested structures.
+
+ Example: Querying Multi-Level Nested Collections
+
+Let’s say we have a `Customer` class, which contains a list of `Order` objects, and each `Order` contains a list of `Item` objects. We’ll query to find the total amount spent by each customer on their orders.
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace LINQMultiLevelNesting
+{
+    class Item
+    {
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+
+        public Item(string name, decimal price)
+        {
+            Name = name;
+            Price = price;
+        }
+    }
+
+    class Order
+    {
+        public int OrderId { get; set; }
+        public List<Item> Items { get; set; }
+
+        public Order(int orderId, List<Item> items)
+        {
+            OrderId = orderId;
+            Items = items;
+        }
+    }
+
+    class Customer
+    {
+        public string Name { get; set; }
+        public List<Order> Orders { get; set; }
+
+        public Customer(string name, List<Order> orders)
+        {
+            Name = name;
+            Orders = orders;
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Sample data for customers, orders, and items
+            var customers = new List<Customer>
+            {
+                new Customer("Alice", new List<Order>
+                {
+                    new Order(1, new List<Item> { new Item("Laptop", 1200), new Item("Mouse", 30) }),
+                    new Order(2, new List<Item> { new Item("Phone", 800), new Item("Charger", 20) })
+                }),
+                new Customer("Bob", new List<Order>
+                {
+                    new Order(3, new List<Item> { new Item("TV", 500), new Item("Remote", 20) })
+                })
+            };
+
+            // Calculate total amount spent by each customer
+            var customerTotals = customers
+                .Select(c => new
+                {
+                    CustomerName = c.Name,
+                    TotalSpent = c.Orders
+                        .SelectMany(o => o.Items)    // Flatten the list of items
+                        .Sum(i => i.Price)           // Sum the prices of all items
+                })
+                .ToList();
+
+            // Display the result
+            foreach (var total in customerTotals)
+            {
+                Console.WriteLine($"{total.CustomerName} spent {total.TotalSpent:C}");
+            }
+        }
+    }
+}
+
+
+ Explanation:
+- `SelectMany(o => o.Items)`: Flattens the list of items within each order.
+- `Sum(i => i.Price)`: Sums the prices of all items in each order.
+- `ToList()`: Converts the results into a list for further manipulation or display.
+
+ Output:
+
+Alice spent $2050.00
+Bob spent $520.00
+
+
+
+
+ 11.3. Handling Complex Queries with LINQ
+
+In complex data structures, LINQ allows you to combine different methods like `Select`, `Where`, `SelectMany`, `GroupBy`, and `OrderBy` to retrieve and manipulate data.
+
+ Example: Complex Query with Grouping and Ordering
+
+Let's say you want to group the customers by the total amount spent and order them by their total spending.
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace LINQComplexQueryExample
+{
+    class Item
+    {
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+
+        public Item(string name, decimal price)
+        {
+            Name = name;
+            Price = price;
+        }
+    }
+
+    class Order
+    {
+        public int OrderId { get; set; }
+        public List<Item> Items { get; set; }
+
+        public Order(int orderId, List<Item> items)
+        {
+            OrderId = orderId;
+            Items = items;
+        }
+    }
+
+    class Customer
+    {
+        public string Name { get; set; }
+        public List<Order> Orders { get; set; }
+
+        public Customer(string name, List<Order> orders)
+        {
+            Name = name;
+            Orders = orders;
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Sample data for customers, orders, and items
+            var customers = new List<Customer>
+            {
+                new Customer("Alice", new List<Order>
+                {
+                    new Order(1, new List<Item> { new Item("Laptop", 1200), new Item("Mouse", 30) }),
+                    new Order(2, new List<Item> { new Item("Phone", 800), new Item("Charger", 20) })
+                }),
+                new Customer("Bob", new List<Order>
+                {
+                    new Order(3, new List<Item> { new Item("TV", 500), new Item("Remote", 20) })
+                }),
+                new Customer("Charlie", new List<Order>
+                {
+                    new Order(4, new List<Item> { new Item("Tablet", 300), new Item("Headphones", 50) })
+                })
+            };
+
+            // Query: Group customers by total spent and order by the total amount spent
+            var groupedAndOrderedCustomers = customers
+                .Select(c => new
+                {
+                    CustomerName = c.Name,
+                    TotalSpent = c.Orders
+                        .SelectMany(o => o.Items)    // Flatten items
+                        .Sum(i => i.Price)           // Sum all item prices
+                })
+                .OrderByDescending(c => c.TotalSpent)    // Order by total spent, descending
+                .ToList();
+
+            // Display the result
+            foreach (var customer in groupedAndOrderedCustomers)
+            {
+                Console.WriteLine($"{customer.CustomerName} spent {customer.TotalSpent:C}");
+            }
+        }
+    }
+}
+
+
+ Explanation:
+- `SelectMany(o => o.Items)`: Flattens the list of items.
+- `Sum(i => i.Price)`: Sums the prices of items.
+- `OrderByDescending(c => c.TotalSpent)`: Orders customers by the total amount spent, in descending order.
+
+
+  
+ Output:
+
+Alice spent $2050.00
+Bob spent $520.00
+Charlie spent $350.00
+
+
+
+
+ 11.4. Practice Exercises
+
+Now it's time to practice and explore these concepts further:
+
+1. Create a `School` class that contains a list of `Student` objects. Each student has a name, age, and list of subjects. Write a LINQ query to find students who are older than 18 and who are enrolled in "Math".
+2. Write a query that calculates the total sales from an `Order` list, which contains `Item` objects (name and price).
+3. Write a LINQ query to find the top 3 highest-priced products in a list of products.
+
+
+
+Once you've worked through these exercises, you'll have a good understanding of how to handle complex data structures with LINQ. Tomorrow, we will explore even more advanced LINQ operations!
+
+ Day 12: LINQ Grouping and Aggregation
+
+Welcome to Day 12! Today, we will focus on grouping and aggregation in LINQ. These are essential operations for working with datasets that require summarization, such as grouping data by a category or calculating totals and averages.
+
+
+
+ 12.1. Grouping Data in LINQ
+
+Grouping is a powerful feature in LINQ that lets you categorize data based on specific keys. You can group items by any property and then perform aggregation on those groups.
+
+ Example: Grouping by a Property
+
+Let's say you have a list of `Student` objects, and you want to group them by their age.
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace LINQGroupingExample
+{
+    class Student
+    {
+        public string Name { get; set; }
+        public int Age { get; set; }
+
+        public Student(string name, int age)
+        {
+            Name = name;
+            Age = age;
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Sample data for students
+            var students = new List<Student>
+            {
+                new Student("Alice", 18),
+                new Student("Bob", 19),
+                new Student("Charlie", 18),
+                new Student("David", 20),
+                new Student("Eve", 19)
+            };
+
+            // Group students by age
+            var groupedByAge = students
+                .GroupBy(s => s.Age)  // Group by the Age property
+                .ToList();
+
+            // Display the results
+            foreach (var group in groupedByAge)
+            {
+                Console.WriteLine($"Age: {group.Key}");
+                foreach (var student in group)
+                {
+                    Console.WriteLine($"  Student: {student.Name}");
+                }
+            }
+        }
+    }
+}
+
+
+ Explanation:
+- `GroupBy(s => s.Age)`: Groups the students by their age. The `GroupBy` method returns an `IEnumerable<IGrouping<TKey, TElement>>`, where each group has a key (age) and a collection of students.
+- `group.Key`: The `Key` property of the grouping represents the value used for grouping—in this case, the age.
+  
+ Output:
+
+Age: 18
+  Student: Alice
+  Student: Charlie
+Age: 19
+  Student: Bob
+  Student: Eve
+Age: 20
+  Student: David
+
+
+
+
+ 12.2. Aggregating Data in LINQ
+
+Once you have grouped data, you often need to aggregate it (e.g., sum, count, average). LINQ provides several methods for aggregation, such as `Sum`, `Count`, `Average`, and `Max`.
+
+ Example: Counting and Summing Data
+
+Let’s say you have a list of `Product` objects with prices, and you want to calculate the total price of all products and count how many products are in the list.
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace LINQAggregationExample
+{
+    class Product
+    {
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+
+        public Product(string name, decimal price)
+        {
+            Name = name;
+            Price = price;
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Sample data for products
+            var products = new List<Product>
+            {
+                new Product("Laptop", 1200),
+                new Product("Smartphone", 800),
+                new Product("Tablet", 300),
+                new Product("Headphones", 50)
+            };
+
+            // Aggregate: Calculate total price and count of products
+            var totalPrice = products.Sum(p => p.Price);  // Sum the prices
+            var totalCount = products.Count();            // Count the products
+
+            Console.WriteLine($"Total Price: {totalPrice:C}");
+            Console.WriteLine($"Total Products: {totalCount}");
+        }
+    }
+}
+
+
+ Explanation:
+- `Sum(p => p.Price)`: Sums the prices of all products.
+- `Count()`: Counts the total number of products in the list.
+
+ Output:
+
+Total Price: $2350.00
+Total Products: 4
+
+
+
+
+ 12.3. Grouping and Aggregating Combined
+
+In many cases, you need to both group and aggregate data at the same time. Let's combine grouping and aggregation to calculate the total sales for each product category.
+
+ Example: Grouping and Summing
+
+Here’s how you can group products by category and calculate the total sales for each category:
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace LINQGroupingAndAggregation
+{
+    class Product
+    {
+        public string Name { get; set; }
+        public string Category { get; set; }
+        public decimal Price { get; set; }
+
+        public Product(string name, string category, decimal price)
+        {
+            Name = name;
+            Category = category;
+            Price = price;
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Sample data for products
+            var products = new List<Product>
+            {
+                new Product("Laptop", "Electronics", 1200),
+                new Product("Smartphone", "Electronics", 800),
+                new Product("Tablet", "Electronics", 300),
+                new Product("Headphones", "Accessories", 50),
+                new Product("Charger", "Accessories", 20)
+            };
+
+            // Group products by category and calculate the total price for each category
+            var groupedByCategory = products
+                .GroupBy(p => p.Category)  // Group by Category
+                .Select(g => new
+                {
+                    Category = g.Key,
+                    TotalSales = g.Sum(p => p.Price)  // Sum the prices for each group
+                })
+                .ToList();
+
+            // Display the result
+            foreach (var group in groupedByCategory)
+            {
+                Console.WriteLine($"Category: {group.Category}, Total Sales: {group.TotalSales:C}");
+            }
+        }
+    }
+}
+
+
+ Explanation:
+- `GroupBy(p => p.Category)`: Groups products by their category.
+- `Select(g => new { Category = g.Key, TotalSales = g.Sum(p => p.Price) })`: Projects each group into an anonymous object containing the category and the sum of product prices for that category.
+
+ Output:
+
+Category: Electronics, Total Sales: $2300.00
+Category: Accessories, Total Sales: $70.00
+
+
+
+
+ 12.4. Grouping with Multiple Keys
+
+You can also group data by multiple keys. For example, grouping products by both category and price range.
+
+ Example: Grouping by Multiple Keys
+
+Let’s group products by their category and by whether their price is above or below $500.
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace LINQMultipleKeyGrouping
+{
+    class Product
+    {
+        public string Name { get; set; }
+        public string Category { get; set; }
+        public decimal Price { get; set; }
+
+        public Product(string name, string category, decimal price)
+        {
+            Name = name;
+            Category = category;
+            Price = price;
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Sample data for products
+            var products = new List<Product>
+            {
+                new Product("Laptop", "Electronics", 1200),
+                new Product("Smartphone", "Electronics", 800),
+                new Product("Tablet", "Electronics", 300),
+                new Product("Headphones", "Accessories", 50),
+                new Product("Charger", "Accessories", 20)
+            };
+
+            // Group products by category and price range (above/below 500)
+            var groupedByCategoryAndPrice = products
+                .GroupBy(p => new { p.Category, PriceRange = p.Price > 500 ? "Above 500" : "Below 500" })
+                .ToList();
+
+            // Display the result
+            foreach (var group in groupedByCategoryAndPrice)
+            {
+                Console.WriteLine($"Category: {group.Key.Category}, Price Range: {group.Key.PriceRange}");
+                foreach (var product in group)
+                {
+                    Console.WriteLine($"  Product: {product.Name}, Price: {product.Price:C}");
+                }
+            }
+        }
+    }
+}
+
+
+ Explanation:
+- `GroupBy(p => new { p.Category, PriceRange = p.Price > 500 ? "Above 500" : "Below 500" })`: Groups by both category and a computed price range.
+  
+ Output:
+
+Category: Electronics, Price Range: Above 500
+  Product: Laptop, Price: $1200.00
+  Product: Smartphone, Price: $800.00
+Category: Electronics, Price Range: Below 500
+  Product: Tablet, Price: $300.00
+Category: Accessories, Price Range: Below 500
+  Product: Headphones, Price: $50.00
+  Product: Charger, Price: $20.00
+
+
+
+
+ 12.5. Practice Exercises
+
+To reinforce the concepts you’ve learned today, try the following exercises:
+
+1. Group students by their age and calculate the total number of students in each age group.
+2. Group products by category, and for each group, calculate the average price of the products.
+3. Group employees by their department, and calculate the average salary for each department.
+
+
+
+Today, you’ve learned how to group and aggregate data in LINQ. These operations are extremely
+
+ useful when working with complex datasets. Tomorrow, we will dive into LINQ Join operations, which are crucial for combining data from multiple collections.
+ 
+  Day 13: LINQ Joins
+
+Welcome to Day 13! Today, we will learn about LINQ Joins. Joins are one of the most common operations in querying data, especially when you need to combine data from multiple collections (tables, lists, etc.).
+
+
+
+ 13.1. What is a Join in LINQ?
+
+A join in LINQ allows you to combine elements from two or more sequences based on a common key. It’s similar to SQL joins where you match rows between tables based on a shared column.
+
+ Types of Joins:
+- Inner Join: Combines only matching elements.
+- Left Join (Left Outer Join): Combines all elements from the left sequence and matching elements from the right.
+- Right Join (Right Outer Join): Combines all elements from the right sequence and matching elements from the left.
+- Full Join (Full Outer Join): Combines all elements from both sequences, including non-matching elements from both sides.
+
+For now, we'll focus on Inner Join and Left Join, and we’ll gradually build up to the others.
+
+
+
+ 13.2. Inner Join
+
+An Inner Join returns only the elements that have matching values in both sequences.
+
+ Example: Inner Join
+
+Let’s say you have two lists: `students` and `enrollments`. You want to join them based on the `StudentId` to get the names of students and the courses they are enrolled in.
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace LINQInnerJoinExample
+{
+    class Student
+    {
+        public int StudentId { get; set; }
+        public string Name { get; set; }
+    }
+
+    class Enrollment
+    {
+        public int StudentId { get; set; }
+        public string Course { get; set; }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Sample data for students
+            var students = new List<Student>
+            {
+                new Student { StudentId = 1, Name = "Alice" },
+                new Student { StudentId = 2, Name = "Bob" },
+                new Student { StudentId = 3, Name = "Charlie" }
+            };
+
+            // Sample data for enrollments
+            var enrollments = new List<Enrollment>
+            {
+                new Enrollment { StudentId = 1, Course = "Math" },
+                new Enrollment { StudentId = 2, Course = "Science" },
+                new Enrollment { StudentId = 4, Course = "History" }
+            };
+
+            // Inner join students and enrollments on StudentId
+            var innerJoin = from student in students
+                            join enrollment in enrollments
+                            on student.StudentId equals enrollment.StudentId
+                            select new
+                            {
+                                student.Name,
+                                enrollment.Course
+                            };
+
+            // Display the results
+            foreach (var record in innerJoin)
+            {
+                Console.WriteLine($"{record.Name} is enrolled in {record.Course}");
+            }
+        }
+    }
+}
+
+
+ Explanation:
+- `join enrollment in enrollments on student.StudentId equals enrollment.StudentId`: This is the syntax for an inner join. It matches records from both `students` and `enrollments` where the `StudentId` values are equal.
+- `select new { student.Name, enrollment.Course }`: After joining, we select the student’s name and their course.
+
+ Output:
+
+Alice is enrolled in Math
+Bob is enrolled in Science
+
+
+Notice that Charlie did not appear because there was no matching record in the `enrollments` collection for him.
+
+
+
+ 13.3. Left Join (Left Outer Join)
+
+A Left Join returns all elements from the left sequence (in this case, the `students` list) and the matching elements from the right sequence (the `enrollments` list). If there is no match, the right sequence will contain `null` values.
+
+ Example: Left Join
+
+Let’s use the same `students` and `enrollments` lists. This time, we want to get all students, whether they are enrolled in a course or not.
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace LINQLeftJoinExample
+{
+    class Student
+    {
+        public int StudentId { get; set; }
+        public string Name { get; set; }
+    }
+
+    class Enrollment
+    {
+        public int StudentId { get; set; }
+        public string Course { get; set; }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Sample data for students
+            var students = new List<Student>
+            {
+                new Student { StudentId = 1, Name = "Alice" },
+                new Student { StudentId = 2, Name = "Bob" },
+                new Student { StudentId = 3, Name = "Charlie" }
+            };
+
+            // Sample data for enrollments
+            var enrollments = new List<Enrollment>
+            {
+                new Enrollment { StudentId = 1, Course = "Math" },
+                new Enrollment { StudentId = 2, Course = "Science" }
+            };
+
+            // Left join students and enrollments on StudentId
+            var leftJoin = from student in students
+                           join enrollment in enrollments
+                           on student.StudentId equals enrollment.StudentId into studentEnrollments
+                           from enrollment in studentEnrollments.DefaultIfEmpty()  // DefaultIfEmpty() handles missing matches
+                           select new
+                           {
+                               student.Name,
+                               Course = enrollment?.Course ?? "No Course"  // Use null conditional operator to handle nulls
+                           };
+
+            // Display the results
+            foreach (var record in leftJoin)
+            {
+                Console.WriteLine($"{record.Name} is enrolled in {record.Course}");
+            }
+        }
+    }
+}
+
+
+ Explanation:
+- `join enrollment in enrollments on student.StudentId equals enrollment.StudentId into studentEnrollments`: The `into studentEnrollments` part is important. It groups the `enrollments` by `StudentId`.
+- `from enrollment in studentEnrollments.DefaultIfEmpty()`: `DefaultIfEmpty()` ensures that even if no matching record is found in the `enrollments` list, the student is still included, and the `enrollment` will be `null`.
+- `Course = enrollment?.Course ?? "No Course"`: This is the null-coalescing operator. It assigns `"No Course"` if `enrollment` is `null`.
+
+ Output:
+
+Alice is enrolled in Math
+Bob is enrolled in Science
+Charlie is enrolled in No Course
+
+
+Now Charlie appears with `"No Course"` because there was no matching record in the `enrollments` collection.
+
+
+
+ 13.4. Joining with Anonymous Types
+
+In many cases, you may want to join on multiple properties. You can use anonymous types to group by multiple keys.
+
+ Example: Joining on Multiple Keys
+
+Let’s say you have a list of `products` and `sales`, and you want to join them based on both `ProductId` and `SaleDate`.
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace LINQMultipleKeyJoin
+{
+    class Product
+    {
+        public int ProductId { get; set; }
+        public string Name { get; set; }
+    }
+
+    class Sale
+    {
+        public int ProductId { get; set; }
+        public DateTime SaleDate { get; set; }
+        public int Quantity { get; set; }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Sample data for products
+            var products = new List<Product>
+            {
+                new Product { ProductId = 1, Name = "Laptop" },
+                new Product { ProductId = 2, Name = "Phone" }
+            };
+
+            // Sample data for sales
+            var sales = new List<Sale>
+            {
+                new Sale { ProductId = 1, SaleDate = new DateTime(2021, 1, 1), Quantity = 10 },
+                new Sale { ProductId = 2, SaleDate = new DateTime(2021, 1, 2), Quantity = 5 },
+                new Sale { ProductId = 1, SaleDate = new DateTime(2021, 1, 2), Quantity = 3 }
+            };
+
+            // Join products and sales on ProductId and SaleDate
+            var join = from product in products
+                       join sale in sales
+                       on new { product.ProductId, SaleDate = sale.SaleDate.Date } equals new { sale.ProductId, SaleDate = sale.SaleDate.Date }
+                       select new
+                       {
+                           product.Name,
+                           sale.SaleDate,
+                           sale.Quantity
+                       };
+
+            // Display the results
+            foreach (var record in join)
+            {
+                Console.WriteLine($"{record.Name} was sold on {record.SaleDate.ToShortDateString()} with quantity {record.Quantity}");
+            }
+        }
+    }
+}
+
+
+ Explanation:
+- `on new { product.ProductId, SaleDate = sale.SaleDate.Date } equals new { sale.ProductId, SaleDate = sale.SaleDate.Date }`: We use an anonymous type to join on both the `ProductId` and the `SaleDate` (with `.Date` to ignore time).
+  
+ Output:
+
+Laptop was sold on 1/1/2021 with quantity 10
+Phone was sold on 1/2/2021 with quantity 5
+Laptop was sold on 1/2/2021 with quantity 3
+
+
+
+
+ 13.5. Practice Exercises
+
+To reinforce the concepts learned today, try the following exercises:
+
+1. Inner Join: Join a list of `Customers` and `Orders` to get a list of customers and the products they ordered.
+2. Left Join: Get a list of all products and their sales data. If a product hasn’t been sold, display "No Sales."
+3. Multiple Key Join: Join two lists of `Students` and `Scores` where both `StudentId` and `Subject` match.
+
+
+
+Today, you’ve learned how to perform different types of LINQ joins. Tomorrow, we’ll explore LINQ Projection, where we’ll learn how to transform data into new shapes and forms.
